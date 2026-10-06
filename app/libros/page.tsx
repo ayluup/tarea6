@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { API_BASE_URL } from "../lib/api";
 
 type Libro = {
   id: number;
@@ -9,7 +10,9 @@ type Libro = {
 
 export default async function Libros() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/libros");
+    const res = await fetch(`${API_BASE_URL}/api/libros`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Error al obtener los libros");

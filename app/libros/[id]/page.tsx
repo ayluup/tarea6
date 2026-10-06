@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "../../lib/api";
+
 type Libro = {
   id: number;
   titulo: string;
@@ -14,7 +16,9 @@ export default async function DetalleLibro({
   const { id } = await params;
 
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/libros/${id}`);
+    const res = await fetch(`${API_BASE_URL}/api/libros/${encodeURIComponent(id)}`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Libro no encontrado");
